@@ -1,0 +1,7 @@
+{
+  "name": "Copy of Z-FIN",
+  "description": "Next-gen cybernetic financial analysis engine powered by Gemini AI, featuring the MachinaFusion aesthetic.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
