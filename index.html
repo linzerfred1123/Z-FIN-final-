@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Z-FIN | Cybernetic Finance Engine</title>
+    <title>Z-FIN | Titanium Emerald Financial Engine</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script>
@@ -18,87 +18,98 @@
             },
             colors: {
               machina: {
-                bg: '#050505',
-                panel: '#0a0a0a',
-                border: 'rgba(0, 242, 255, 0.1)',
-                cyan: '#00f2ff',
-                magenta: '#ff00ff',
-                purple: '#7000ff'
+                bg: '#010409',
+                panel: 'rgba(7, 10, 15, 0.75)',
+                border: 'rgba(45, 212, 191, 0.2)',
+                cyan: '#2dd4bf', 
+                magenta: '#fbbf24', 
+                purple: '#10b981', 
+                green: '#34d399'
               }
+            },
+            animation: {
+              'border-beam': 'border-beam 4s ease infinite',
+              'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+              'reveal': 'reveal 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+              'scanline': 'scanline 8s linear infinite',
             }
           }
         }
       }
     </script>
     <style>
-        body {
-            font-family: 'Space Grotesk', sans-serif;
-            background-color: #050505;
-            color: #ffffff;
-            overflow-x: hidden;
+        :root {
+            --machina-cyan: #2dd4bf;
         }
         
-        /* MachinaFusion Grid Background */
-        .tech-grid {
-            background-image: 
-                linear-gradient(rgba(0, 242, 255, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 242, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px;
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background-color: #010409;
+            color: #f1f5f9;
+            overflow-x: hidden;
+        }
+
+        .mesh-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 50% 50%, rgba(45, 212, 191, 0.05) 0%, transparent 70%);
+        }
+
+        .scanlines {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.3) 50%);
+            background-size: 100% 4px;
+            z-index: 50;
+            pointer-events: none;
+            opacity: 0.1;
         }
 
         .cyber-panel {
-            background: rgba(10, 10, 10, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(0, 242, 255, 0.15);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cyber-panel::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #00f2ff, transparent);
-            opacity: 0.5;
+            background: rgba(7, 10, 15, 0.7);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .neon-glow-cyan {
-            filter: drop-shadow(0 0 8px rgba(0, 242, 255, 0.4));
-        }
-
-        @keyframes pulse-tech {
-            0%, 100% { opacity: 0.3; transform: scale(1); }
-            50% { opacity: 0.6; transform: scale(1.05); }
-        }
-        
-        .tech-pulse {
-            animation: pulse-tech 4s ease-in-out infinite;
-        }
-
-        .scanline {
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent, rgba(0, 242, 255, 0.05), transparent);
-            position: absolute;
-            top: -100px;
-            left: 0;
-            animation: scanline 3s linear infinite;
-            pointer-events: none;
+        .cyber-panel:hover {
+            border-color: rgba(45, 212, 191, 0.3);
+            box-shadow: 0 0 40px rgba(45, 212, 191, 0.05);
         }
 
         @keyframes scanline {
-            0% { top: -100px; }
-            100% { top: 100%; }
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100%); }
         }
 
-        /* Machina Scrollbar */
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { background: #00f2ff; border-radius: 2px; }
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Matrix Canvas container */
+        #matrix-canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+        }
+
+        .hands-svg {
+            filter: drop-shadow(0 0 20px rgba(45, 212, 191, 0.3));
+        }
+
+        .glow-point {
+            animation: pulse-glow 2s infinite;
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { filter: blur(5px) brightness(1); transform: scale(1); }
+            50% { filter: blur(12px) brightness(1.5); transform: scale(1.2); }
+        }
     </style>
 <script type="importmap">
 {
@@ -109,12 +120,52 @@
     "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
     "recharts": "https://esm.sh/recharts@^3.6.0",
     "pdfjs-dist": "https://esm.sh/pdfjs-dist@4.10.38",
-    "lucide-react": "https://esm.sh/lucide-react@0.475.0"
+    "lucide-react": "https://esm.sh/lucide-react@0.475.0",
+    "jspdf": "https://esm.sh/jspdf@2.5.1",
+    "html2canvas": "https://esm.sh/html2canvas@1.4.1"
   }
 }
 </script>
 </head>
-<body class="tech-grid min-h-screen">
+<body>
+    <div class="mesh-bg"></div>
+    <div class="scanlines"></div>
+    <canvas id="matrix-canvas"></canvas>
     <div id="root"></div>
+    <script>
+        const canvas = document.getElementById('matrix-canvas');
+        const ctx = canvas.getContext('2d');
+        let width, height, columns;
+        const fontSize = 16;
+        const chars = "01$¥€₿%#&*@XYZ";
+        let drops = [];
+
+        function initMatrix() {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+            columns = Math.floor(width / fontSize);
+            drops = new Array(columns).fill(1);
+        }
+
+        function drawMatrix() {
+            ctx.fillStyle = "rgba(1, 4, 9, 0.1)";
+            ctx.fillRect(0, 0, width, height);
+            ctx.fillStyle = "#2dd4bf";
+            ctx.font = fontSize + "px 'JetBrains Mono'";
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        initMatrix();
+        window.addEventListener('resize', initMatrix);
+        setInterval(drawMatrix, 50);
+    </script>
 </body>
 </html>

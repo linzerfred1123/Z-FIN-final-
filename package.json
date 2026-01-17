@@ -14,7 +14,9 @@
     "react-dom": "^19.2.3",
     "recharts": "^3.6.0",
     "pdfjs-dist": "4.10.38",
-    "lucide-react": "0.475.0"
+    "lucide-react": "0.475.0",
+    "jspdf": "2.5.1",
+    "html2canvas": "1.4.1"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",

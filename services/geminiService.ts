@@ -21,17 +21,18 @@ export const analyzeFinancialData = async (
   const prompt = `You are an elite CFO and Business Intelligence Architect. 
   Analyze the provided financial data and generate a hyper-professional business dashboard in JSON format.
   
-  IMPORTANT: All text in the response (summary, labels, titles, descriptions, recommendations) MUST be in ${targetLang}.
+  IMPORTANT: All text in the response (summary, labels, titles, descriptions, recommendations, riskReason) MUST be in ${targetLang}.
   
   Requirements for the JSON:
   1. Summary: Clear, concise executive overview.
   2. Metrics: 4 key KPIs (e.g., EBITDA, Net Margin, Current Ratio) with trend labels.
   3. ChartData: At least 6 time-series data points (Revenue, Expenses, Profit).
-  4. ExpenseBreakdown: An array of 5 main categories for a pie chart.
+  4. ExpenseBreakdown: An array of 5-7 categories for a pie chart. Ensure they cover the majority of OpEx to form a complete picture.
   5. ComparisonData: Key metrics (like Revenue, COGS, OpEx) comparing Current Period vs Previous Period.
   6. Insights: 3-4 strategic high-impact recommendations.
   7. RiskRating: Score 1-10.
-  8. Currency: The currency used in the document (e.g., "$", "¥", "€").
+  8. RiskReason: A detailed paragraph explaining why this risk rating was given based on specific data points (liabilities, cash flow, margins).
+  9. Currency: The currency used in the document (e.g., "$", "¥", "€").
 
   Tone: Objective, authoritative, and data-driven.
   `;
@@ -48,6 +49,7 @@ export const analyzeFinancialData = async (
         properties: {
           summary: { type: Type.STRING },
           currency: { type: Type.STRING },
+          riskReason: { type: Type.STRING },
           metrics: {
             type: Type.ARRAY,
             items: {
@@ -116,7 +118,7 @@ export const analyzeFinancialData = async (
           },
           riskRating: { type: Type.NUMBER }
         },
-        required: ['summary', 'metrics', 'chartData', 'expenseBreakdown', 'comparisonData', 'insights', 'riskRating', 'currency']
+        required: ['summary', 'metrics', 'chartData', 'expenseBreakdown', 'comparisonData', 'insights', 'riskRating', 'riskReason', 'currency']
       }
     }
   });

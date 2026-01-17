@@ -46,6 +46,7 @@ export interface AnalysisResult {
   comparisonData: ComparisonData[];
   insights: ExpertInsight[];
   riskRating: number;
+  riskReason: string;
   currency: string;
 }
 
